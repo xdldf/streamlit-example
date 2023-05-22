@@ -3,6 +3,5 @@ streamlit
 plotly
 pickle
 numpy
-sys
 sklearn
 flask 
