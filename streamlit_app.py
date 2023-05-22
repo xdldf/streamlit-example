@@ -1,21 +1,33 @@
-import streamlit as st
-import plotly.graph_objs as go
+import pickle
+# Импортируем все пакеты, которые необходимы для вашей модели
+import numpy as np
+import sys
+from sklearn.neighbors import KNeighborsClassifier
 
-# Создание данных для графика
-x_values = list(range(10))
-y_values = list(range(10))
+# Импортируем Flask для создания API
+from flask import Flask, request
 
-# Создание графика с помощью Plotly
-fig = go.FigureWidget([go.Scatter(x=x_values, y=y_values, mode='markers')])
+# Загружаем обученную модель из текущего каталога
+with open('./model.pkl', 'rb') as model_pkl:
+   knn = pickle.load(model_pkl)
 
-# Функция для обновления данных на графике при перетаскивании точек мышью
-def update_point(trace, points, selector):
-    for i in points.point_inds:
-        x_values[i] = points.xs[i]
-        y_values[i] = points.ys[i]
+# Инициализируем приложение Flask
+app = Flask(__name__)
 
-# Добавление обработчика событий для обновления данных на графике при перетаскивании точек мышью
-fig.data[0].on_click(update_point)
+# Создайте конечную точку API
+@app.route('/predict')
+def predict_iris():
+   # Считываем все необходимые параметры запроса
+   sl = request.args.get('sl')
+   sw = request.args.get('sw')
+   pl = request.args.get('pl')
+   pw = request.args.get('pw')
 
-# Отображение графика в Streamlit
-st.plotly_chart(fig)
+# Используем метод модели predict для
+# получения прогноза для неизвестных данных
+   unseen = np.array([[sl, sw, pl, pw]])
+   result = knn.predict(unseen)
+  # возвращаем результат 
+   return 'Predicted result for observation ' + str(unseen) + ' is: ' + str(result)
+if __name__ == '__main__':
+   app.run()
