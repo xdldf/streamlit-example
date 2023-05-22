@@ -2,6 +2,7 @@ import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd
+import plotly.express as px
 # Load the model into memory
 with open('new_model.pkl', 'rb') as model_pkl:
     lr = pd.read_pickle(model_pkl)
@@ -22,9 +23,7 @@ if result < 0:
 else:
     st.write(f'При количестве безработных в {float(unseen)} тыс. человек, количество алкоголиков будет составлять {result} тыс. человек')
 
-import streamlit as st
-import pandas as pd
-import plotly.express as px
+
 
 # Создание DataFrame с данными для точечного графика
 df = pd.DataFrame({
