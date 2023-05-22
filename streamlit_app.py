@@ -1,7 +1,6 @@
 import streamlit as st
 import pickle
 import numpy as np
-from sklearn.neighbors import KNeighborsClassifier
 
 # Load the model into memory
 with open('/content/drive/MyDrive/model_pognali/new_model.pkl', 'rb') as model_pkl:
