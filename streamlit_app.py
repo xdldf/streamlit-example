@@ -16,7 +16,7 @@ X_test_sm = np.squeeze(X_test_sm)
 
 # Make a prediction using the model
 result = lr.predict(X_test_sm)[0]
-
+result = result.toFixed(3)
 # Display the result
 if result < 0:
     st.write(f'При количестве безработных в {float(unseen)} тыс. человек, алкоголиков не будет')
