@@ -17,4 +17,4 @@ X_test_sm = np.squeeze(X_test_sm)
 result = lr.predict(X_test_sm)[0]
 
 # Display the result
-st.write(f'При количестве безработных {float(unseen)*1000:.0f}, количество алкоголиков будет составлять {result*1000:.0f}')
+st.write(f'При количестве безработных {float(unseen)} тыс. человек, количество алкоголиков будет составлять {result} тыс. человек')
