@@ -1,10 +1,10 @@
 import streamlit as st
 import pickle
 import numpy as np
-
+import pandas as pd
 # Load the model into memory
 with open('new_model.pkl', 'rb') as model_pkl:
-    lr = pandas.read_pickle(model_pkl)
+    lr = pd.read_pickle(model_pkl)
 
 # Create a text input for the user to enter the value for the unseen variable
 unseen = st.text_input('Enter the value for the unseen variable:', 45.367)
