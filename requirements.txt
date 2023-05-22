@@ -1,7 +1,6 @@
 pandas
 streamlit
 plotly
-pickle
 numpy
 sklearn
 flask 
