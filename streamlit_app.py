@@ -7,7 +7,7 @@ with open('new_model.pkl', 'rb') as model_pkl:
     lr = pd.read_pickle(model_pkl)
 
 # Create a text input for the user to enter the value for the unseen variable
-unseen = st.text_input('Enter the value for the unseen variable:', 45.367)
+unseen = st.text_input('Enter the value for the unseen variable:')
 
 # Convert the input to a float and create a test observation
 X_test_sm = [[float(1.0)], [float(unseen)]]
