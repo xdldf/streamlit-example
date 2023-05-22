@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 
 # Load the model into memory
-with open('./new_model.pkl', 'rb') as model_pkl:
+with open('new_model.pkl', 'rb') as model_pkl:
     lr = pickle.load(model_pkl)
 
 # Create a text input for the user to enter the value for the unseen variable
