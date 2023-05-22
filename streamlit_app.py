@@ -1,33 +1,21 @@
+mport streamlit as st
 import pickle
-# Импортируем все пакеты, которые необходимы для вашей модели
 import numpy as np
-import sys
 from sklearn.neighbors import KNeighborsClassifier
 
-# Импортируем Flask для создания API
-from flask import Flask, request
+# Load the model into memory
+with open('/content/drive/MyDrive/model_pognali/new_model.pkl', 'rb') as model_pkl:
+    lr = pickle.load(model_pkl)
 
-# Загружаем обученную модель из текущего каталога
-with open('./model.pkl', 'rb') as model_pkl:
-   knn = pickle.load(model_pkl)
+# Create a text input for the user to enter the value for the unseen variable
+unseen = st.text_input('Enter the value for the unseen variable:', 45.367)
 
-# Инициализируем приложение Flask
-app = Flask(__name__)
+# Convert the input to a float and create a test observation
+X_test_sm = [[float(1.0)], [float(unseen)]]
+X_test_sm = np.squeeze(X_test_sm)
 
-# Создайте конечную точку API
-@app.route('/predict')
-def predict_iris():
-   # Считываем все необходимые параметры запроса
-   sl = request.args.get('sl')
-   sw = request.args.get('sw')
-   pl = request.args.get('pl')
-   pw = request.args.get('pw')
+# Make a prediction using the model
+result = lr.predict(X_test_sm)[0]
 
-# Используем метод модели predict для
-# получения прогноза для неизвестных данных
-   unseen = np.array([[sl, sw, pl, pw]])
-   result = knn.predict(unseen)
-  # возвращаем результат 
-   return 'Predicted result for observation ' + str(unseen) + ' is: ' + str(result)
-if __name__ == '__main__':
-   app.run()
+# Display the result
+st.write(f'При количестве безработных {float(unseen)*1000:.0f}, количество алкоголиков будет составлять {result*1000:.0f}')
