@@ -17,27 +17,10 @@ X_test_sm = np.squeeze(X_test_sm)
 # Make a prediction using the model
 result = lr.predict(X_test_sm)[0]
 result = float('{:.3f}'.format(result))
+
 # Display the result
 if result < 0:
     st.write(f'При количестве безработных в {float(unseen)} тыс. человек, алкоголиков не будет')
 else:
     st.write(f'При количестве безработных в {float(unseen)} тыс. человек, количество алкоголиков будет составлять {result} тыс. человек')
 
-
-
-# Создание DataFrame с данными для точечного графика
-df = pd.DataFrame({
-    'x': [1, 2, 3, 4],
-    'y': [10, 20, 30, 40]
-})
-
-# Создание точечного графика с помощью Plotly Express
-fig = px.scatter(df, x='x', y='y')
-
-# Добавление возможности изменения значений точек с помощью мышки
-fig.update_traces(mode='markers', marker={'size': 15}, 
-                  dragmode='select', selected={'marker': {'opacity': 1}}, 
-                  unselected={'marker': {'opacity': 0.3}})
-
-# Отображение графика в Streamlit
-st.plotly_chart(fig)
